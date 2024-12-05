@@ -60,13 +60,13 @@ mschema.save(f'./{db_name}.json')
 
 3、Text-to-SQL Generation
 ```python
-dielact = db_engine.dialect.name
+dialect = db_engine.dialect.name
 question = ''
 evidence = ''
 prompt = """You are now a {dialect} data analyst, and you are given a database schema as follows:
 
 【Schema】
-{db_mschema}
+{db_schema}
 
 【Question】
 {question}

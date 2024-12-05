@@ -52,8 +52,29 @@ from schema_engine import SchemaEngine
 
 schema_engine = SchemaEngine(engine=db_engine, db_name=db_name)
 mschema = schema_engine.mschema
-print(mschema.to_mschema())
+mschema_str = mschema.to_mschema()
+print(mschema_str)
 mschema.save(f'./{db_name}.json')
+```
+
+3、Text-to-SQL Generation
+```python
+dielact = db_engine.dialect.name
+question = ''
+evidence = ''
+prompt = """You are a {dialect} expert. You need to read and understand the following database schema description, as well as the evidence that may be used, and use your SQLite knowledge to generate SQL statements to answer user questions. The generated SQL is protected by ```sql and ```.
+
+【Schema】
+{db_schema}
+
+【Question】
+{question}
+【Evidence】
+{evidence}
+""".format(dialect=dialect, question=question, db_schema=mschema, evidence=evidence)
+
+# Replace the function call_llm() with your own function or method to interact with a LLM API.
+response = call_llm(prompt)
 ```
 
 

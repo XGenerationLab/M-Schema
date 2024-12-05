@@ -34,6 +34,7 @@ legalities.uuid=cards.uuid
 ```shell
 pip install -r requirements.txt
 ```
+
 ## Quick Start
 You can just connect to the database using [```sqlalchemy```](https://www.sqlalchemy.org/) and construct M-Schema representation.
 
@@ -62,15 +63,18 @@ mschema.save(f'./{db_name}.json')
 dielact = db_engine.dialect.name
 question = ''
 evidence = ''
-prompt = """You are a {dialect} expert. You need to read and understand the following database schema description, as well as the evidence that may be used, and use your SQLite knowledge to generate SQL statements to answer user questions. The generated SQL is protected by ```sql and ```.
+prompt = """You are now a {dialect} data analyst, and you are given a database schema as follows:
 
 【Schema】
-{db_schema}
+{db_mschema}
 
 【Question】
 {question}
+
 【Evidence】
 {evidence}
+
+Please read and understand the database schema carefully, and generate an executable SQL based on the user's question and evidence. The generated SQL is protected by ```sql and ```.
 """.format(dialect=dialect, question=question, db_schema=mschema, evidence=evidence)
 
 # Replace the function call_llm() with your own function or method to interact with a LLM API.

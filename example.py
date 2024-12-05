@@ -32,7 +32,7 @@ prompt = """You are now a {dialect} data analyst, and you are given a database s
 {evidence}
 
 Please read and understand the database schema carefully, and generate an executable SQL based on the user's question and evidence. The generated SQL is protected by ```sql and ```.
-""".format(dialect=dialect, question=question, db_schema=mschema, evidence=evidence)
+""".format(dialect=dialect, question=question, db_schema=mschema_str, evidence=evidence)
 
 # Replace the function call_llm() with your own function or method to interact with a LLM API.
 # response = call_llm(prompt)

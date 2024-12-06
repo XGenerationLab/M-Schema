@@ -31,6 +31,7 @@ legalities.uuid=cards.uuid
 
 ## Requirements
 + python >= 3.9
+
 You can install the required packages with the following command:
 ```shell
 pip install -r requirements.txt

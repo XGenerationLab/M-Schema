@@ -5,7 +5,7 @@ This repository contains the code for connecting to the database and constructin
 We support a variety of relational databases, such as MySQL, PostgreSQL, Oracle, etc.
 
 <p align="center">
-  <img src="https://github.com/XGenerationLab/M-Schema/blob/main/schema_representation.png" alt="image" width="400"/>
+  <img src="https://github.com/XGenerationLab/M-Schema/blob/main/schema_representation.png" alt="image" width="600"/>
 </p>
 
 ## Requirements

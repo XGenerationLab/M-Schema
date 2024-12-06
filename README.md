@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ## Quick Start
 You can just connect to the database using [```sqlalchemy```](https://www.sqlalchemy.org/) and construct M-Schema representation.
 
-1、create a database connection.
+1. Create a database connection.
 
 Take PostgreSQL as an example:
 ```python
@@ -28,7 +28,7 @@ db_name = 'mydatabase'
 db_engine = create_engine(f"postgresql+psycopg2://scott:tiger@localhost:5432/{db_name}")
 ```
 
-2、construct M-Schema representation.
+2. Construct M-Schema representation.
 ```python
 from schema_engine import SchemaEngine
 
@@ -39,7 +39,7 @@ print(mschema_str)
 mschema.save(f'./{db_name}.json')
 ```
 
-3、use for Text-to-SQL.
+3. Use for Text-to-SQL.
 ```python
 dialect = db_engine.dialect.name
 question = ''

@@ -28,6 +28,11 @@ db_name = 'mydatabase'
 db_engine = create_engine(f"postgresql+psycopg2://scott:tiger@localhost:5432/{db_name}")
 ```
 
+Connect to MySQL:
+```
+db_engine = create_engine(f"mysql+pymysql://{db_user_name}:{db_pwd}@{db_host}:{port}/{db_name}")
+```
+
 2. Construct M-Schema representation.
 ```python
 from schema_engine import SchemaEngine

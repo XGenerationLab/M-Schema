@@ -29,7 +29,7 @@ db_engine = create_engine(f"postgresql+psycopg2://scott:tiger@localhost:5432/{db
 ```
 
 Connect to MySQL:
-```
+```python
 db_engine = create_engine(f"mysql+pymysql://{db_user_name}:{db_pwd}@{db_host}:{port}/{db_name}")
 ```
 

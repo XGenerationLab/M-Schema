@@ -33,6 +33,14 @@ Connect to MySQL:
 db_engine = create_engine(f"mysql+pymysql://{db_user_name}:{db_pwd}@{db_host}:{port}/{db_name}")
 ```
 
+Connect to SQLite:
+```python
+import os
+db_path = ""
+abs_path = os.path.abspath(db_path)
+db_engine = create_engine(f'sqlite:///{abs_path}')
+```
+
 2. Construct M-Schema representation.
 ```python
 from schema_engine import SchemaEngine

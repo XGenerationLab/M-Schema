@@ -80,7 +80,7 @@ Please read and understand the database schema carefully, and generate an execut
 If you find our work helpful, feel free to give us a cite.
 ```bibtex
 @article{xiyansql,
-      title={XiYan-SQL: A Multi-Generator Ensemble Framework for Text-to-SQL}, 
+      title={A Preview of XiYan-SQL: A Multi-Generator Ensemble Framework for Text-to-SQL}, 
       author={Yingqi Gao and Yifu Liu and Xiaoxia Li and Xiaorong Shi and Yin Zhu and Yiming Wang and Shiqi Li and Wei Li and Yuntao Hong and Zhiling Luo and Jinyang Gao and Liyu Mou and Yu Li},
       year={2024},
       journal={arXiv preprint arXiv:2411.08599},

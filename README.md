@@ -24,8 +24,7 @@ You can just connect to the database using [```sqlalchemy```](https://www.sqlalc
 Take PostgreSQL as an example:
 ```python
 from sqlalchemy import create_engine
-db_name = 'mydatabase'
-db_engine = create_engine(f"postgresql+psycopg2://scott:tiger@localhost:5432/{db_name}")
+db_engine = create_engine(f"postgresql+psycopg2://{db_user_name}:{db_pwd}@{db_host}:{port}/{db_name}")
 ```
 
 Connect to MySQL:

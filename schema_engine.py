@@ -94,7 +94,12 @@ class SchemaEngine(SQLDatabase):
         for table_name in self._usable_tables:
             table_comment = self.get_table_comment(table_name)
             table_comment = '' if table_comment is None else table_comment.strip()
-            table_with_schema = self._tables_schemas[table_name] + '.' + table_name
+            # For MySQL, avoid duplicate schema name in table identifier
+            schema_name = self._tables_schemas[table_name]
+            if schema_name == self._db_name:
+                table_with_schema = table_name
+            else:
+                table_with_schema = schema_name + '.' + table_name
             self._mschema.add_table(table_with_schema, fields={}, comment=table_comment)
             pks = self.get_pk_constraint(table_name)
 

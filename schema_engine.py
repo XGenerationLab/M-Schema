@@ -11,14 +11,20 @@ class SchemaEngine(SQLDatabase):
     def __init__(self, engine: Engine, schema: Optional[str] = None, metadata: Optional[MetaData] = None,
                  ignore_tables: Optional[List[str]] = None, include_tables: Optional[List[str]] = None,
                  sample_rows_in_table_info: int = 3, indexes_in_table_info: bool = False,
-                 custom_table_info: Optional[dict] = None, view_support: bool = False, max_string_length: int = 300,
+                 custom_table_info: Optional[dict] = None, 
+                 view_support: bool = False, max_string_length: int = 300,                 
                  mschema: Optional[MSchema] = None, db_name: Optional[str] = ''):
         super().__init__(engine, schema, metadata, ignore_tables, include_tables, sample_rows_in_table_info,
                          indexes_in_table_info, custom_table_info, view_support, max_string_length)
-
+        
         self._db_name = db_name
         # Dictionary to store table names and their corresponding schema
         self._tables_schemas: Dict[str, str] = {}
+
+        # For MySQL and similar databases, if no schema is specified but db_name is provided,
+        # use db_name as the schema to avoid getting tables from all databases
+        if schema is None and db_name and self._engine.dialect.name in ['mysql', 'postgresql']:
+            schema = db_name
 
         # If a schema is specified, filter by that schema and store that value for every table.
         if schema:

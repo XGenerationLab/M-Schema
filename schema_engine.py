@@ -11,14 +11,22 @@ class SchemaEngine(SQLDatabase):
     def __init__(self, engine: Engine, schema: Optional[str] = None, metadata: Optional[MetaData] = None,
                  ignore_tables: Optional[List[str]] = None, include_tables: Optional[List[str]] = None,
                  sample_rows_in_table_info: int = 3, indexes_in_table_info: bool = False,
-                 custom_table_info: Optional[dict] = None, view_support: bool = False, max_string_length: int = 300,
+                 custom_table_info: Optional[dict] = None, 
+                 view_support: bool = False, max_string_length: int = 300,                 
                  mschema: Optional[MSchema] = None, db_name: Optional[str] = ''):
         super().__init__(engine, schema, metadata, ignore_tables, include_tables, sample_rows_in_table_info,
                          indexes_in_table_info, custom_table_info, view_support, max_string_length)
-
+        
         self._db_name = db_name
         # Dictionary to store table names and their corresponding schema
-        self._tables_schemas: Dict[str, str] = {}
+        self._tables_schemas: Dict[str, str] = {}        # For MySQL and similar databases, if no schema is specified but db_name is provided,
+        # use db_name as the schema to avoid getting tables from all databases
+        if schema is None and db_name:
+            if self._engine.dialect.name == 'mysql':
+                schema = db_name
+            elif self._engine.dialect.name == 'postgresql':
+                # For PostgreSQL, use 'public' as default schema
+                schema = 'public'
 
         # If a schema is specified, filter by that schema and store that value for every table.
         if schema:
@@ -85,10 +93,23 @@ class SchemaEngine(SQLDatabase):
         return values
 
     def init_mschema(self):
+        print(f"Debug: Database dialect = {self._engine.dialect.name}")
+        print(f"Debug: DB name = {self._db_name}")
+        print(f"Debug: Available schemas = {self.get_schema_names()}")
+        print(f"Debug: Usable tables = {self._usable_tables}")
+        print(f"Debug: Tables schemas mapping = {self._tables_schemas}")
+        
         for table_name in self._usable_tables:
             table_comment = self.get_table_comment(table_name)
-            table_comment = '' if table_comment is None else table_comment.strip()
-            table_with_schema = self._tables_schemas[table_name] + '.' + table_name
+            table_comment = '' if table_comment is None else table_comment.strip()            # For MySQL, avoid duplicate schema name in table identifier
+            # For PostgreSQL, include schema name if it's not 'public'
+            schema_name = self._tables_schemas[table_name]
+            if self._engine.dialect.name == 'mysql' and schema_name == self._db_name:
+                table_with_schema = table_name
+            elif self._engine.dialect.name == 'postgresql' and schema_name == 'public':
+                table_with_schema = table_name
+            else:
+                table_with_schema = schema_name + '.' + table_name
             self._mschema.add_table(table_with_schema, fields={}, comment=table_comment)
             pks = self.get_pk_constraint(table_name)
 

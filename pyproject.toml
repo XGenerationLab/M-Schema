@@ -1,0 +1,13 @@
+[project]
+name = "m-schema"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "llama-index>=0.12.42",
+    "numpy>=2.3.0",
+    "psycopg2>=2.9.10",
+    "pymysql>=1.1.1",
+    "sqlalchemy>=2.0.41",
+]

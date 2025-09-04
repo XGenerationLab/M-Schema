@@ -74,6 +74,19 @@ Please read and understand the database schema carefully, and generate an execut
 # response = call_llm(prompt)
 ```
 
+## Contact us:
+
+If you are interested in our research or products, please feel free to contact us.
+
+#### Contact Information:
+
+Yifu Liu, zhencang.lyf@alibaba-inc.com
+
+#### Join Our DingTalk Group
+
+<a href="https://github.com/XGenerationLab/XiYan-SQL/blob/main/xiyansql_dingding.png">Ding Group钉钉群</a> 
+
+
 
 ## Citation
 If you find our work helpful, feel free to give us a cite.
